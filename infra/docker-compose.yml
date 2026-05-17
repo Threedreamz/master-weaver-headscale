@@ -1,0 +1,35 @@
+networks:
+  headscale-net:
+    driver: bridge
+
+services:
+  headscale:
+    image: headscale/headscale:0.23.0
+    command: ["serve"]
+    restart: unless-stopped
+    networks:
+      - headscale-net
+    volumes:
+      - /data/headscale:/var/lib/headscale
+      - ./config.yaml:/etc/headscale/config.yaml:ro
+      - /etc/headscale/oidc-secret:/etc/headscale/oidc-secret:ro
+    ports:
+      - target: 3478
+        published: 3478
+        protocol: udp
+    # NOTE: No HTTP/HTTPS ports published — Caddy fronts via internal network
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    networks:
+      - headscale-net
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - /data/caddy-data:/data
+      - /data/caddy-config:/config
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - headscale

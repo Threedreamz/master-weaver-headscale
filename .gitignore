@@ -1,0 +1,7 @@
+*.secret
+oidc-secret
+/data/
+caddy-data/
+node_modules/
+.env
+.env.*

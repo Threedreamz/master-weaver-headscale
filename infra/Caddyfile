@@ -1,0 +1,11 @@
+headscale.threedreamz.com {
+  tls okokunze@gmail.com
+
+  reverse_proxy headscale:8080
+
+  encode gzip
+
+  log {
+    output file /data/access.log
+  }
+}
