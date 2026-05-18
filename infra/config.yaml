@@ -68,7 +68,7 @@ oidc:
   client_id: headscale
   # Populated by Phase 4 provisioning (provision-hetzner-headscale.cjs)
   client_secret_path: /etc/headscale/oidc-secret
-  use_expiry_from_token: true
+  use_expiry_from_token: false
   scope:
     - openid
     - email
