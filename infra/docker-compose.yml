@@ -1,35 +1,29 @@
-networks:
-  headscale-net:
-    driver: bridge
+## Co-locate variant: headscale runs alongside deploy-manager on shared host.
+## Host's existing Caddy (already serving deploy.ersatzteildrucken.org) provides
+## TLS for headscale.threedreamz.com via reverse_proxy to 127.0.0.1:8080.
+## No local Caddy in this stack — would conflict with the host's Caddy on :443.
 
 services:
   headscale:
     image: headscale/headscale:0.23.0
     command: ["serve"]
     restart: unless-stopped
-    networks:
-      - headscale-net
     volumes:
       - /data/headscale:/var/lib/headscale
       - ./config.yaml:/etc/headscale/config.yaml:ro
       - /etc/headscale/oidc-secret:/etc/headscale/oidc-secret:ro
     ports:
+      # HTTP API — bind ONLY to host loopback so only host's Caddy can reach it
+      - target: 8080
+        published: 8080
+        host_ip: 127.0.0.1
+        protocol: tcp
+      # Metrics — loopback only
+      - target: 9090
+        published: 9090
+        host_ip: 127.0.0.1
+        protocol: tcp
+      # STUN — must be publicly reachable for DERP NAT traversal
       - target: 3478
         published: 3478
         protocol: udp
-    # NOTE: No HTTP/HTTPS ports published — Caddy fronts via internal network
-
-  caddy:
-    image: caddy:2-alpine
-    restart: unless-stopped
-    networks:
-      - headscale-net
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - /data/caddy-data:/data
-      - /data/caddy-config:/config
-    ports:
-      - "80:80"
-      - "443:443"
-    depends_on:
-      - headscale
