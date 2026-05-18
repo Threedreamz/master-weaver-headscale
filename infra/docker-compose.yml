@@ -1,6 +1,6 @@
 ## Co-locate variant: headscale runs alongside deploy-manager on shared host.
 ## Host's existing Caddy (already serving deploy.ersatzteildrucken.org) provides
-## TLS for headscale.threedreamz.com via reverse_proxy to 127.0.0.1:8080.
+## TLS for headscale.threedreamz.org via reverse_proxy to 127.0.0.1:8080.
 ## No local Caddy in this stack — would conflict with the host's Caddy on :443.
 
 services:
