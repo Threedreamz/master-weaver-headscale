@@ -78,6 +78,7 @@ oidc:
     - okokunze@gmail.com
     - oliver@kunze.pl
     - oli@kunze.pl
+    - niklas@threedreamz.com
   strip_email_domain: false
   # NOTE: oidc.pkce does NOT exist in v0.23 schema — omitted
 
