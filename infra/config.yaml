@@ -2,7 +2,7 @@
 # Reference: https://github.com/juanfont/headscale/blob/v0.23.0/config-example.yaml
 # Phase 4 populates /etc/headscale/oidc-secret on the host
 
-server_url: https://headscale.threedreamz.com
+server_url: https://headscale.threedreamz.org
 listen_addr: 0.0.0.0:8080
 metrics_listen_addr: 0.0.0.0:9090
 grpc_listen_addr: 127.0.0.1:50443
@@ -50,7 +50,7 @@ acls_policy_path: ""
 
 dns:
   magic_dns: true
-  base_domain: ts.threedreamz.com
+  base_domain: ts.threedreamz.org
   nameservers:
     global:
       - 1.1.1.1
