@@ -64,7 +64,7 @@ dns:
 oidc:
   only_start_if_oidc_is_available: true
   # CONFIRMED issuer: bare URL, no /oidc suffix (per pitfall 2026-04-28 [mwauth])
-  issuer: https://auth.finderfinder.org
+  issuer: https://auth.infra.threedreamz.org
   client_id: headscale
   # Populated by Phase 4 provisioning (provision-hetzner-headscale.cjs)
   client_secret_path: /etc/headscale/oidc-secret
