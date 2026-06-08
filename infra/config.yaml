@@ -74,6 +74,8 @@ oidc:
     - email
     - profile
   # Defense-in-depth allowlist mirrors FinderAuth OIDC_OPERATOR_ALLOWED_EMAILS
+  allowed_domains:
+    - threedreamz.com
   allowed_users:
     - okokunze@gmail.com
     - oliver@kunze.pl
